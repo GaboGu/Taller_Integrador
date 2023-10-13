@@ -137,4 +137,4 @@ GitHub.sublime-settings
 .history
 
 #Apikey
-api_key
+config.py
