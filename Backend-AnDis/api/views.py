@@ -7,3 +7,6 @@ from .models import Usuario
 class UsuariosView(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
     queryset = Usuario.objects.all()
+
+#Probando
+

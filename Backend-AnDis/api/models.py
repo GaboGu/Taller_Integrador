@@ -7,5 +7,7 @@ class Usuario(models.Model):
     correoElectronico = models.EmailField(unique=True)
     contraseña =  models.CharField(max_length=200)
     fechaRegistro = models.DateField(auto_now_add=True)
+
+     
     def __str__(self):
         return self.nombre
