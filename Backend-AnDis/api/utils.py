@@ -1,28 +1,19 @@
-import config
+
 import openai
 
-openai.api_key = config.api_key
+# Asegúrate de que hayas configurado tu API key de OpenAI
+openai.api_key = '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'  # Reemplaza con tu clave API
 
-#audio_file= open("D:\Descargas\AudioLarguito.mp3", "rb")
-#transcript = openai.Audio.transcribe("whisper-1", audio_file)
-
-#print(transcript.text)
-
-#def transcribe_audio(audio_file):
-    #try:
-     #   transcription = openai.Audio.transcribe("whisper-1", audio_file)
-    #    return transcription['text']
-   # except Exception as e:
-  #      return str(e)#
-
-def transcribe_audio(audio_file_path):
-    with open("D:\Descargas\Audio_de_prueba.mp3", 'rb') as audio_file:
+##Transcripción
+def transcribe_audio(audio_file):
+    try:
         transcription = openai.Audio.transcribe("whisper-1", audio_file)
-    return transcription['text']
-
-audio = transcribe_audio("D:\Descargas\AudioLarguito.mp3")
+        return transcription['text']
+    except Exception as e:
+        return str(e)
+    
 ##RESUMEN
-def abstract_summary_extraction(transcription):
+def summary_extraction(transcription):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         temperature=0,
@@ -57,24 +48,6 @@ def key_points_extraction(transcription):
     )
     return response['choices'][0]['message']['content']
 
-#ANALISIS DE SENTIMIENTO
-def sentiment_analysis(transcription):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        temperature=0,
-        messages=[
-            {
-                "role": "system",
-                "content": "As an AI with expertise in language and emotion analysis, your task is to analyze the sentiment of the following text. Please consider the overall tone of the discussion, the emotion conveyed by the language used, and the context in which words and phrases are used. Indicate whether the sentiment is generally positive, negative, or neutral, and provide brief explanations for your analysis where possible. In spanish"
-            },
-            {
-                "role": "user",
-                "content": transcription
-            }
-        ]
-    )
-    return response['choices'][0]['message']['content']
-
 #PALABRAS CLAVE
 def key_words(transcription):
     response = openai.ChatCompletion.create(
@@ -92,19 +65,3 @@ def key_words(transcription):
         ]
     )
     return response['choices'][0]['message']['content']
-
-##Printeando transcripción
-print("TRANSCRIPCIÓN.\n"+audio+"\n")
-##Probando resumen
-resumen = abstract_summary_extraction(audio)
-print("Probando resumen.\n"+ resumen+"\n")
-##Probando puntos clave
-puntos_clave = key_points_extraction(audio)
-print("Probando puntos clave\n"+ puntos_clave+"\n")
-##Probando analisis de sentimientos
-#analisis_sentimientos = sentiment_analysis(audio)
-#print("Probando análisis de sentimientos.\n"+ analisis_sentimientos)
-##Probando palabras clave
-palabras_clave = key_words(audio)
-print("Probando palabras clave\n"+ key_words(audio)+"\n")
-

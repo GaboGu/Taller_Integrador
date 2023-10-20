@@ -2,7 +2,11 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers 
 from .models import Usuario
 
-
+class UsuarioListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ['id', 'nombre', 'apellidos', 'email']
+        
 class UsuarioRegistro(serializers.ModelSerializer):
     class Meta:
         model = Usuario
@@ -23,3 +27,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Usuario
         fields = ['username', 'email', 'is_staff', 'id']
+
+
+        
