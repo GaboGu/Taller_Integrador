@@ -9,7 +9,7 @@ from django.contrib.auth.models import (
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError('You must privided a valid email address')
+            raise ValueError('You must provided a valid email address')
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -30,7 +30,7 @@ class CustomUserManager(UserManager):
 ##    
 # Create your models here.
 
-class Usuario(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     nombre = models.CharField(max_length=100)
     username = models.CharField(max_length=100,unique=True)
     apellidos = models.CharField(max_length=100)
@@ -42,10 +42,22 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ['']
+    REQUIRED_FIELDS = []
 
-    
     def __str__(self):
         return self.nombre
 
 ##Creando modelo discurso
+
+class Discurso(models.Model):
+    #usuarioID = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    archivoAudio = models.FileField(upload_to='audios/')
+    transcripcion = models.TextField()
+    resumen = models.TextField()
+    palabrasClave = models.TextField()
+    ideasClave = models.TextField()
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Discurso {self.id}'
+

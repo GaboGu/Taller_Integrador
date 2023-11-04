@@ -1,15 +1,16 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers 
-from .models import Usuario
+from .models import User
+from .models import Discurso
 
 class UsuarioListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = User
         fields = ['id', 'nombre', 'apellidos', 'email']
         
 class UsuarioRegistro(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = User
         fields = ['nombre','username','apellidos', 'email', 'password']
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -25,8 +26,23 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta: 
-        model = Usuario
+        model = User
         fields = ['username', 'email', 'is_staff', 'id']
+
+        from rest_framework import serializers
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'nombre', 'apellidos', 'email']
+
+
+##Serializer Discurso
+
+class DiscursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Discurso
+        fields = '__all__'        
 
 
         

@@ -3,7 +3,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework import routers
 from api import views
 from rest_framework_simplejwt.views import TokenRefreshView
-from .views import TranscribeAudioView
+from .views import TranscribeAudioView, DiscursoListaView, DiscursoloDetalleView
 
 
 #router = routers.DefaultRouter()
@@ -16,4 +16,7 @@ urlpatterns = [
     path('refresh/', TokenRefreshView.as_view()),
     path('listar/', views.lista_usuarios),
     path('transcribe-audio/', TranscribeAudioView.as_view(), name='transcribe_audio'),
+    path('discurso/', DiscursoListaView.as_view()),
+    path('discurso/<int:pk>/', DiscursoloDetalleView.as_view()),
+
 ]

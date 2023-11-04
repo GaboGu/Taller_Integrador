@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=^%fg9!*lr+6mlo48sl+89)#w*vw2yjz(l#c(#i8gzt7v9jp(q'
+SECRET_KEY = 'django-insecure-=^fg9!*lr+6mlo48sl+89)#w*vw2yjz(l#c(#i8gzt7v9jp(q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -133,16 +133,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "api.Usuario"
+AUTH_USER_MODEL = "api.User"
 
 #Autorización #Sirve para añadir servidores que puede permitir django gracias al corseheaders
 CORS_ALLOWED_ORIGINS = [ 
    'http://localhost:5174',
-   'http://localhost:5173'
+   'http://localhost:5173',
+   'https://s5m14d8h-5173.brs.devtunnels.ms'
 ]
+CORS_ALLOWED_CREDENTIAL = True
+
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 SIMPLE_JWT = {
