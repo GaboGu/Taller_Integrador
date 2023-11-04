@@ -2,7 +2,7 @@
 import openai
 
 # Asegúrate de que hayas configurado tu API key de OpenAI
-openai.api_key = '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'  # Reemplaza con tu clave API
+openai.api_key = ''  # Reemplaza con tu clave API
 
 ##Transcripción
 def transcribe_audio(audio_file):
